@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, TouchableOpacity, TextInput, AsyncStorage, Alert, Image } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
+import { FormValidationMessage, Button } from 'react-native-elements';
 
 import axios from 'axios';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 import LoadingScreen from '../components/LoadingScreen';
-import Logo from '../components/Logo';
+import Logo from '../components/logo';
 import HomeScreen from '../pages/HomeScreen';
 
 export default class SignIn extends React.Component {
@@ -18,7 +18,7 @@ export default class SignIn extends React.Component {
 
     constructor(props) {
         super(props);
-    
+
         this.state = {
             loading: false,
             access_token : " ",
@@ -38,10 +38,9 @@ export default class SignIn extends React.Component {
         this._changeLanguageEng = this._changeLanguageEng.bind(this);
         this._changeLanguageVn = this._changeLanguageVn.bind(this);
 
-    }  
-    
+    }
+
     componentWillMount(){
-        I18n.initAsync();
         this.getFromStorage();
     }
 
@@ -74,7 +73,7 @@ export default class SignIn extends React.Component {
     }
 
     _changeLanguageEng(){
-        I18n.locale = "en"; 
+        I18n.locale = "en";
         try {
             AsyncStorage.setItem('language', 'en');
         } catch (error) {
@@ -83,7 +82,7 @@ export default class SignIn extends React.Component {
         this.setState({language : 'en'});
     }
     _changeLanguageVn(){
-        I18n.locale = "vi-VN"; 
+        I18n.locale = "vi-VN";
         try {
             AsyncStorage.setItem('language', 'vi-VN');
         } catch (error) {
@@ -97,7 +96,7 @@ export default class SignIn extends React.Component {
     //         I18n.t('languagePrompt'),
     //         [
     //           {text: I18n.t('eng'), onPress: () => {
-    //             I18n.locale = "en"; 
+    //             I18n.locale = "en";
     //             try {
     //               AsyncStorage.setItem('language', 'en');
     //             } catch (error) {
@@ -106,7 +105,7 @@ export default class SignIn extends React.Component {
     //             this.forceUpdate();
     //           }},
     //           {text: I18n.t('viet'), onPress: () => {
-    //             I18n.locale = "vi-VN"; 
+    //             I18n.locale = "vi-VN";
     //             try {
     //               AsyncStorage.setItem('language', 'vi-VN');
     //             } catch (error) {
@@ -160,7 +159,7 @@ export default class SignIn extends React.Component {
         const username = this.state.email;
         const password = this.state.password;
         this.setState({loading: true});
-        
+
         axios.post(`https://tinhieu-backend.herokuapp.com/log-in/user`, {
             username: username,
             password: password
@@ -196,15 +195,15 @@ export default class SignIn extends React.Component {
                         this.setState({access_token : " ", user_id: null, errorMessage : "Tài khoản của bạn chưa được kích hoạt hoặc đã hết hạn"});
                     }
                 }).then(res => {
-                    if(this.state.access_token != " ") 
+                    if(this.state.access_token != " ")
                         this.props.navigation.navigate('Home', {user_id : this.state.user_id, access_token : this.state.access_token, parentNavigation: this.props.navigation, language : this.state.language });
                 }).catch(error =>{
-                    console.log(error); 
+                    console.log(error);
                     this.setState({errorMessage : "Tài khoản của bạn chưa được kích hoạt hoặc đã hết hạn"});
                 });
             }
         }).catch(error =>{
-            console.log(error); 
+            console.log(error);
             this.setState({errorMessage : "Tài khoản của bạn không hợp lệ hoặc chưa được kích hoạt"});
         });
     }
@@ -213,8 +212,8 @@ export default class SignIn extends React.Component {
         const email = this.state.email;
         const password = this.state.password;
         this.setState({loading: true});
-        console.log(email) 
-        
+        console.log(email)
+
         axios.post(`https://tinhieu-backend.herokuapp.com/log-in/admin`, {
             email: email,
             password: password
@@ -229,7 +228,7 @@ export default class SignIn extends React.Component {
         }).catch(error =>{
             this.setState({errorMessage : "Đăng nhập Admin không hợp lệ"})
         });
-    
+
         //
     }
 
@@ -243,27 +242,27 @@ export default class SignIn extends React.Component {
         if (this.state.ready === false) {
             // render "booting" screen while reading data from storate or remote server
             return <LoadingScreen />;
-        }   
+        }
         if(!this.state.qualified){
 
             return(
                 <View style={styles.container}>
-                    {/* <Button 
+                    {/* <Button
                         title= {I18n.t('languageSelect')}
                         onPress = {this._alertLanguage}
                     /> */}
                     <Logo/>
-                    
-                    <TextInput 
-                        style = {styles.inputBox} 
+
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         placeholder = {I18n.t('username')}
                         selectionColor="#fff"
                         placeholderTextColor = '#fff'
                         onChangeText={(text) => this.setState({ email : text})}
                     />
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         placeholder = {I18n.t('password')}
                         secureTextEntry={true}
@@ -275,14 +274,14 @@ export default class SignIn extends React.Component {
                         {this.state.errorMessage}
                     </FormValidationMessage>
                     <View style = {styles.rowContainer}>
-                    <Button 
+                    <Button
                         buttonStyle = {styles.buttonSignUp}
                         title= {I18n.t('signup')}
                         textStyle = {styles.buttonText}
                         containerViewStyle = {styles.buttonContainer}
                         onPress = {() => this.props.navigation.navigate('SignUp')}
                     />
-                    <Button 
+                    <Button
                         buttonStyle = {styles.buttonSignIn}
                         title= {I18n.t('signin')}
                         textStyle = {styles.buttonText}
@@ -319,7 +318,7 @@ export default class SignIn extends React.Component {
             if(this.state.user_type == 'User')
             //return (<HomeScreen user_id = {this.state.user_id} access_token = {this.state.access_token}/>)
                 return this.props.navigation.navigate('Home', {user_id : this.state.user_id, access_token : this.state.access_token, parentNavigation: this.props.navigation, language : this.state.language });
-            
+
             else{
                 if(this.state.user_type == 'Admin')
                     return this.props.navigation.navigate('Admin', {access_token : this.state.access_token, parentNavigation: this.props.navigation });

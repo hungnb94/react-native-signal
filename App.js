@@ -1,13 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, KeyboardAvoidingView, BackHandler, AsyncStorage, Button, Alert } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { StyleSheet, View, StatusBar, BackHandler } from 'react-native';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 import HomeScreen from './src/pages/HomeScreen';
 import AdminHomeScreen from './src/pages/AdminHomeScreen';
-import I18n from 'ex-react-native-i18n';
-
+import I18n from 'react-native-i18n';
 
 
 const AuthenticationNavigator = createStackNavigator({
@@ -17,40 +15,40 @@ const AuthenticationNavigator = createStackNavigator({
 
 
 const AppNavigator = createSwitchNavigator({
-  /* 
+  /*
    * Rather than being rendered by a screen component, the
    * AuthenticationNavigator is a screen component
    */
   Auth: AuthenticationNavigator,
   Home: HomeScreen,
-  Admin: AdminHomeScreen, 
+  Admin: AdminHomeScreen,
 });
 
 export default class App extends React.Component {
-  
+
   constructor(props) {
     super(props);
 
     this.state = {
         language: "vi-VN"
     };
-    
-  }  
+
+  }
   componentWillMount(){
 
   }
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
-  
+
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
-  
+
   handleBackButton() {
     return true;
   }
-  
+
 
   render() {
     console.disableYellowBox = true;

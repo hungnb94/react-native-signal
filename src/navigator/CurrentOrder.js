@@ -1,13 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList } from 'react-native';
 import { List, ListItem, SearchBar, Header } from "react-native-elements";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PTRView from 'react-native-pull-to-refresh';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 import axios from 'axios';
-import {GetRequest} from '../helper/request_helper';
 
 
 export default class CurrentOrder extends React.Component {
@@ -24,20 +22,20 @@ export default class CurrentOrder extends React.Component {
         };
 
         this._refresh = this._refresh.bind(this);
-    }  
+    }
 
 
-    
+
     componentDidMount() {
         this.makeRemoteRequest();
     }
-    
+
 
     makeRemoteRequest = () => {
         var dataDisplay = [];
         this.setState({ loading: true });
         console.log("here");
-        axios.get(`https://tinhieu-backend.herokuapp.com/notification`, 
+        axios.get(`https://tinhieu-backend.herokuapp.com/notification`,
         {
             headers: {
                 "Authorization" : "Bearer " + this.state.access_token
@@ -57,13 +55,13 @@ export default class CurrentOrder extends React.Component {
 
         })
     };
-    
+
 
     _refresh() {
         return new Promise((resolve) => {
             this.makeRemoteRequest();
             setTimeout(()=>{resolve()}, 1000)
-          
+
         });
     }
 
@@ -78,14 +76,14 @@ export default class CurrentOrder extends React.Component {
           />
         );
       };
-    
+
     render() {
         return (
             <View style = {styles.container}>
-            <Header 
+            <Header
             outerContainerStyles={{ backgroundColor: 'black', height: StatusBar.currentHeight - 5 }}
             />
-            <Header 
+            <Header
                 centerComponent={{ text: I18n.t('currentSignal'), style: { color: '#fff', fontSize: 16, fontWeight: 'bold' } }}
                 outerContainerStyles={{ backgroundColor: '#5F5395', height: 50, marginTop: StatusBar.height }}
 
@@ -109,7 +107,7 @@ export default class CurrentOrder extends React.Component {
                             containerStyle={{ borderBottomWidth: 0 }}
                             onPress={()=> this.props.navigation.navigate('CurrentOrderLook', { item: item, access_token : this.state.access_token })}
                             />
-                        
+
                         )}
                     />
             </PTRView>

@@ -4,7 +4,7 @@ import { List, ListItem, SearchBar, Header } from "react-native-elements";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {NavigationActions} from 'react-navigation';
 import Prompt from 'rn-prompt';
-import {Permissions, Notifications} from 'expo';
+// import {Permissions, Notifications} from 'expo';
 import * as firebase from 'firebase';
 import axios from 'axios';
 
@@ -12,8 +12,8 @@ export default class AdminAccount extends React.Component {
     static navigationOptions = {
         header: null
     }
-    
-        
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -46,9 +46,9 @@ export default class AdminAccount extends React.Component {
         //this.promptDeactive= this.promptDeactive.bind(this);
         this.sendNotification= this.sendNotification.bind(this);
         this._sendPushNotification = this._sendPushNotification.bind(this);
-        this.registerForPushNotificationsAsync = this.registerForPushNotificationsAsync.bind(this);
+        // this.registerForPushNotificationsAsync = this.registerForPushNotificationsAsync.bind(this);
         this.onLogOut = this.onLogOut.bind(this);
-    }  
+    }
 
     onLogOut(){
         this.props.screenProps.onLogOut();
@@ -56,34 +56,34 @@ export default class AdminAccount extends React.Component {
 
     componentDidMount(){
         this.getUserNumber();
-        this.registerForPushNotificationsAsync();
+        // this.registerForPushNotificationsAsync();
     }
 
-    registerForPushNotificationsAsync = async () => {
-        const { status: existingStatus } = await Permissions.getAsync(
-          Permissions.NOTIFICATIONS
-        );
-        let finalStatus = existingStatus;
-      
-        // only ask if permissions have not already been determined, because
-        // iOS won't necessarily prompt the user a second time.
-        if (existingStatus !== 'granted') {
-          // Android remote notification permissions are granted during the app
-          // install, so this will only ask on iOS
-          const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-          finalStatus = status;
-        }
-      
-        // Stop here if the user did not grant permissions
-        if (finalStatus !== 'granted') {
-          return;
-        }
-      
-        // Get the token that uniquely identifies this device
-        let token = await Notifications.getExpoPushTokenAsync();
-        
-        console.log("token" + token);
-    }
+    // registerForPushNotificationsAsync = async () => {
+        // const { status: existingStatus } = await Permissions.getAsync(
+        //   Permissions.NOTIFICATIONS
+        // );
+        // let finalStatus = existingStatus;
+        //
+        // // only ask if permissions have not already been determined, because
+        // // iOS won't necessarily prompt the user a second time.
+        // if (existingStatus !== 'granted') {
+        //   // Android remote notification permissions are granted during the app
+        //   // install, so this will only ask on iOS
+        //   const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        //   finalStatus = status;
+        // }
+        //
+        // // Stop here if the user did not grant permissions
+        // if (finalStatus !== 'granted') {
+        //   return;
+        // }
+        //
+        // // Get the token that uniquely identifies this device
+        // let token = await Notifications.getExpoPushTokenAsync();
+        //
+        // console.log("token" + token);
+    // }
 
     _sendPushNotification(messageCreate){
 
@@ -97,11 +97,11 @@ export default class AdminAccount extends React.Component {
             // ...
           });
 
-        //return the main promise 
+        //return the main promise
         return firebase.database().ref('users').once('value').then(function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 var expoToken = childSnapshot.val().expoPushToken;
-                if(!pushToken.includes(expoToken)){ 
+                if(!pushToken.includes(expoToken)){
                     messages.push({
                         "to": expoToken,
                         "sound": "default",
@@ -111,7 +111,7 @@ export default class AdminAccount extends React.Component {
                 }
             });
             //firebase.database then() respved a single promise that resolves
-            //once all the messages have been resolved 
+            //once all the messages have been resolved
             return Promise.all(messages)
 
         })
@@ -245,12 +245,12 @@ export default class AdminAccount extends React.Component {
         return (
             <View style = {styles.container}>
             <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: 'black' }}>
-            <Header 
+            <Header
                 centerComponent={{ text: 'Tài Khoản Admin', style: { color: '#fff', fontSize: 16, fontWeight: 'bold' } }}
                 outerContainerStyles={{ backgroundColor: '#5F5395', height: 50 }}
                 innerContainerStyles={{ justifyContent: 'space-around' }}
             />
-            <ListItem 
+            <ListItem
                 title={`Tạo tín hiệu`}
                 titleStyle = {styles.textStyle}
                 containerStyle={{ height: 50 }}
@@ -353,7 +353,7 @@ export default class AdminAccount extends React.Component {
                 }) }
                 onSubmit={ (value) => this.sendNotification(value) }/>
             </View>
-            
+
         );
     }
 }

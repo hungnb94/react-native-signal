@@ -1,10 +1,9 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Text, Alert, ListView, Platform } from 'react-native';
-import registerForPushNotificationsAsync from '../helper/registerForPushNotificationsAsync';
-import { Notifications } from 'expo';
+// import registerForPushNotificationsAsync from '../helper/registerForPushNotificationsAsync';
+// import { Notifications } from 'expo';
 import * as firebase from 'firebase';
 import { List, ListItem, Button } from 'react-native-elements';
-import Expo from 'expo';
 
 export default class LinksScreen extends React.Component {
   constructor(props) {
@@ -23,12 +22,12 @@ export default class LinksScreen extends React.Component {
   }
   componentDidMount() {
     this._notificationSubscription = this._registerForPushNotifications();
-   // this._clearIconBadgeAsync();  
+   // this._clearIconBadgeAsync();
   }
   componentWillUnmount() {
     this._notificationSubscription && this._notificationSubscription.remove();
-  
-    
+
+
   }
 
   // //use later for push notification description
@@ -48,12 +47,12 @@ export default class LinksScreen extends React.Component {
     // You can comment the following line out if you want to stop receiving
     // a notification every time you open the app. Check out the source
     // for this function in api/registerForPushNotificationsAsync.js
-    registerForPushNotificationsAsync();
+    // registerForPushNotificationsAsync();
 
     // Watch for incoming notifications
-    this._notificationSubscription = Notifications.addListener(
-      this._handleNotification
-    );
+    // this._notificationSubscription = Notifications.addListener(
+    //   this._handleNotification
+    // );
   }
   _handleNotification = (notification) => {
     this.userID = firebase.auth().currentUser.uid;

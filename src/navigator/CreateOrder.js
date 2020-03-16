@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, Picker } from '
 import { List, ListItem, SearchBar, Header, FormValidationMessage, Button } from "react-native-elements";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { Permissions, Notifications } from 'expo';
 import axios from 'axios';
 import * as firebase from 'firebase';
 
@@ -17,7 +16,7 @@ export default class CreateOrder extends React.Component {
 
     constructor(props) {
         super(props);
-    
+
         this.state = {
             access_token : this.props.screenProps.access_token,
             loading: false,
@@ -36,8 +35,8 @@ export default class CreateOrder extends React.Component {
         this._createOrder= this._createOrder.bind(this);
         this._sendPushNotification = this._sendPushNotification.bind(this);
 
-    }  
-    
+    }
+
 
     _createOrder() {
         const currency_code = this.state.currency_code;
@@ -90,12 +89,12 @@ export default class CreateOrder extends React.Component {
                 // ...
               });
 
-            //return the main promise 
+            //return the main promise
             return firebase.database().ref('users').once('value').then(function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
-                    
+
                     var expoToken = childSnapshot.val().expoPushToken;
-                    if(!pushToken.includes(expoToken)){ 
+                    if(!pushToken.includes(expoToken)){
                         messages.push({
                             "to": expoToken,
                             "sound": "default",
@@ -105,7 +104,7 @@ export default class CreateOrder extends React.Component {
                     }
                 });
                 //firebase.database then() respved a single promise that resolves
-                //once all the messages have been resolved 
+                //once all the messages have been resolved
                 return Promise.all(messages)
 
             })
@@ -127,14 +126,14 @@ export default class CreateOrder extends React.Component {
 
 
         }
-        
+
     render() {
         return (
             <View style={styles.container}>
                 <KeyboardAwareScrollView scrollEnabled showsVerticalScrollIndicator = {false}>
                     <Text style = {styles.textStyle}> Mã Tiền Tệ </Text>
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         selectionColor="#fff"
                         autoCapitalize = "characters"
@@ -143,7 +142,7 @@ export default class CreateOrder extends React.Component {
                     />
                     <Text style = {styles.textStyle}> Chọn Mua hoặc Bán (1 cho Mua và 2 cho Bán)</Text>
                     {/* <Picker selectedValue={this.state.pickBuy}
-                        style={{ height: 50, width: 100, 
+                        style={{ height: 50, width: 100,
                             backgroundColor: '#5F5395',
                             borderRadius: 10,
                             paddingHorizontal: 16,
@@ -152,8 +151,8 @@ export default class CreateOrder extends React.Component {
                         <Picker.Item label="Mua" value= "0" />
                         <Picker.Item label="Bán" value= "1" />
                     </Picker> */}
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
@@ -161,24 +160,24 @@ export default class CreateOrder extends React.Component {
                         onChangeText={(text) => this.setState({ buy_or_sell : text})}
                     />
                     <Text style = {styles.textStyle}> Giá Mua hoặc Giá Bán </Text>
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
                         onChangeText={(text) => this.setState({ price : text})}
                     />
                     <Text style = {styles.textStyle}> Take Profit #1 </Text>
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
                         onChangeText={(text) => this.setState({ take_profit_one : text})}
                     />
                     <Text style = {styles.textStyle}> Take Profit #2 </Text>
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
@@ -186,8 +185,8 @@ export default class CreateOrder extends React.Component {
 
                     />
                     <Text style = {styles.textStyle}> Take Profit #3 </Text>
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
@@ -195,8 +194,8 @@ export default class CreateOrder extends React.Component {
 
                     />
                     <Text style = {styles.textStyle}> Stop Loss </Text>
-                    <TextInput 
-                        style = {styles.inputBox} 
+                    <TextInput
+                        style = {styles.inputBox}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
@@ -205,7 +204,7 @@ export default class CreateOrder extends React.Component {
                     <FormValidationMessage>
                         {this.state.errorMessage}
                     </FormValidationMessage>
-                    <Button 
+                    <Button
                         buttonStyle = {styles.button}
                         title="Đặt lệnh"
                         textStyle = {styles.buttonText}

@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Keyboa
 import { FormLabel, FormInput, FormValidationMessage, Button, PricingCard, ButtonGroup } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
-import Logo from '../components/Logo';
+import Logo from '../components/logo';
 import RNPickerSelect from 'react-native-picker-select';
 
 
@@ -56,13 +56,14 @@ export default class SignUp extends React.Component {
     this._handleSignup = this._handleSignup.bind(this);
     this.updateIndex = this.updateIndex.bind(this)
 
-  }  
+  }
 
   updateIndex (selectedIndex) {
     this.setState({selectedIndex})
   }
 
   _handleSignup() {
+      console.log('click sign up')
       const first_name  = this.state.first_name;
       const last_name = this.state.last_name;
       const username = this.state.username;
@@ -107,7 +108,7 @@ export default class SignUp extends React.Component {
       }
     }
 
-    
+
 	render() {
         const buttons = ['Plan 1: 1 tháng\n(250k)', 'Plan 2: 3 tháng\n(250k)', 'Plan 3: 6 tháng\n(250k)'];
         const { selectedIndex } = this.state;
@@ -116,16 +117,16 @@ export default class SignUp extends React.Component {
 				<Logo/>
 				<KeyboardAwareScrollView style= {{height : 300}} scrollEnabled showsVerticalScrollIndicator = {false}>
                 <View style = {styles.rowContainer}>
-                    <TextInput 
-                        style = {styles.inputName} 
+                    <TextInput
+                        style = {styles.inputName}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         placeholder = {I18n.t('last')}
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
                         onChangeText={(text) => this.setState({ last_name : text})}
                     />
-                    <TextInput 
-                        style = {styles.inputName} 
+                    <TextInput
+                        style = {styles.inputName}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         placeholder = {I18n.t('first')}
                         selectionColor="#fff"
@@ -133,16 +134,16 @@ export default class SignUp extends React.Component {
                         onChangeText={(text) => this.setState({ first_name : text})}
                     />
                 </View>
-                <TextInput 
-                    style = {styles.inputBox} 
+                <TextInput
+                    style = {styles.inputBox}
                     underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                     placeholder = {I18n.t('username')}
                     selectionColor="#fff"
                     placeholderTextColor = '#ffffff'
                     onChangeText={(text) => this.setState({ username : text})}
                 />
-                <TextInput 
-                    style = {styles.inputBox} 
+                <TextInput
+                    style = {styles.inputBox}
                     underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                     placeholder = {I18n.t('password')}
                     secureTextEntry={true}
@@ -151,8 +152,8 @@ export default class SignUp extends React.Component {
                     onChangeText={(text) => this.setState({ password : text})}
 
                 />
-                <TextInput 
-                    style = {styles.inputBox} 
+                <TextInput
+                    style = {styles.inputBox}
                     underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                     placeholder = {I18n.t('passwordconfirm')}
                     secureTextEntry={true}
@@ -161,8 +162,8 @@ export default class SignUp extends React.Component {
                     onChangeText={(text) => this.setState({ confirm_password : text})}
 
                 />
-                <TextInput 
-                    style = {styles.inputBox} 
+                <TextInput
+                    style = {styles.inputBox}
                     underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                     placeholder = "Email"
                     selectionColor="#fff"
@@ -172,23 +173,23 @@ export default class SignUp extends React.Component {
 
                 />
                 <View style = {styles.rowContainer}>
-                    <TextInput 
-                        style = {styles.inputPhone1} 
+                    <TextInput
+                        style = {styles.inputPhone1}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         placeholder = {I18n.t('area')}
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
                         onChangeText={(text) => this.setState({ area_code : text})}
                     />
-                    <TextInput 
-                        style = {styles.inputPhone2} 
+                    <TextInput
+                        style = {styles.inputPhone2}
                         underlineColorAndroid = 'rgba(0, 0, 0, 0)'
                         placeholder = {I18n.t('phonenumber')}
                         selectionColor="#fff"
                         placeholderTextColor = '#ffffff'
                         onChangeText={(text) => this.setState({ phone : text})}
                     />
-                    
+
                 </View>
                 {/* <View style = {styles.containerPicker}> */}
                 {/* <RNPickerSelect
@@ -206,7 +207,7 @@ export default class SignUp extends React.Component {
                     value={this.state.plan}
                 />
                 </View> */}
-                {/* <ModalDropdown 
+                {/* <ModalDropdown
                     options={['Plan 1: 1 tháng ()', 'Plan 2: 3 tháng ()', 'Plan 3: 6 tháng ()']}
                     onSelect = {(itemIndex, itemValue) => this.setState({plan: itemValue})}
                     style = {styles.pickerBox3}
@@ -232,7 +233,7 @@ export default class SignUp extends React.Component {
                     containerStyle={{
                         height: 100,
                         width: 310,
-                        backgroundColor:'transparent', 
+                        backgroundColor:'transparent',
                         borderWidth: 0,
                         borderColor: '#4C9BCF',
                         alignItems: 'center',
@@ -253,14 +254,14 @@ export default class SignUp extends React.Component {
                         alignSelf: 'center',
                         textAlign:'center',
                         justifyContent: 'center'}}
-                    
+
                  />
                 <FormValidationMessage>
                     {this.state.errorMessage}
                 </FormValidationMessage>
                 <Text/>
             </KeyboardAwareScrollView>
-            <Button 
+            <Button
                     buttonStyle = {styles.button}
                     title= {I18n.t('signup')}
                     textStyle = {styles.buttonText}
@@ -275,7 +276,7 @@ export default class SignUp extends React.Component {
             </Text>
           </TouchableOpacity>
 				</View>
-			</View>	
+			</View>
 
 			)
 	}
@@ -294,7 +295,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent :'center',
     borderRadius: 22,
-    borderWidth: 1, 
+    borderWidth: 1,
     overflow: 'hidden',
     borderColor: '#4C9BCF',
     width: 310,

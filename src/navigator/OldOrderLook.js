@@ -1,12 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, Picker, Alert } from 'react-native';
 import { List, ListItem, SearchBar, Header, FormValidationMessage, Button } from "react-native-elements";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
-import I18n from 'ex-react-native-i18n';
-
-import axios from 'axios';
-import {GetRequest} from '../helper/request_helper';
 
 
 export default class AdminOldOrderLook extends React.Component {
@@ -26,8 +20,8 @@ export default class AdminOldOrderLook extends React.Component {
             item: navigation.getParam('item', null),
             errorMessage : null
         };
-       
-    }  
+
+    }
 
 
     render() {
@@ -37,14 +31,14 @@ export default class AdminOldOrderLook extends React.Component {
         return (
             <View style = {styles.container}>
                 <ListItem hideChevron containerStyle={{ backgroundColor: 'black', height: 40 }}/>
-                <ListItem 
+                <ListItem
                     title={this.state.item.currency_code}
                     titleStyle = {styles.textStyle}
                     subtitle= {"" + date}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={this.state.item.buy_or_sell == 0 ? "BUY": "SELL"}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.item.price}

@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "fSignal",
+    "name": "vfs",
     "icon": "./src/images/logo.png",
     "version": "1.0.0",
-    "slug": "tinhieu",
-    "sdkVersion": "27.0.0",
+    "slug": "vfs",
+    "sdkVersion": "34.0.0",
     "ios": {
-      "bundleIdentifier": "com.tinhieu.tinhieu",
+      "bundleIdentifier": "com.vfs.signal",
       "supportsTablet": true
     },
     "notification": {
@@ -21,8 +21,10 @@
       "backgroundColor": "#ffffff"
     },
     "android": {
-      "package": "com.tinhieu.tinhieu"
-    }
-    
-  }
+      "package": "com.vfs.signal"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "vfs",
+  "name": "vfs"
 }

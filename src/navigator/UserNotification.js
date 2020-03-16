@@ -4,7 +4,7 @@ import { List, ListItem, SearchBar, Header } from "react-native-elements";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PTRView from 'react-native-pull-to-refresh';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 import axios from 'axios';
 import {GetRequest} from '../helper/request_helper';
@@ -24,17 +24,17 @@ export default class UserNotification extends React.Component {
         };
 
         this._refresh = this._refresh.bind(this);
-    }  
+    }
 
     componentDidMount() {
         this.makeRemoteRequest();
     }
-    
+
 
     makeRemoteRequest = () => {
         var dataDisplay = [];
         this.setState({ loading: true });
-        axios.get(`https://tinhieu-backend.herokuapp.com/admin/get_alltext`, 
+        axios.get(`https://tinhieu-backend.herokuapp.com/admin/get_alltext`,
         {
             headers: {
                 "Authorization" : "Bearer " + this.state.access_token
@@ -52,13 +52,13 @@ export default class UserNotification extends React.Component {
 
         })
     };
-    
+
 
     _refresh() {
         return new Promise((resolve) => {
             this.makeRemoteRequest();
             setTimeout(()=>{resolve()}, 1000)
-          
+
         });
     }
 
@@ -73,14 +73,14 @@ export default class UserNotification extends React.Component {
           />
         );
       };
-    
+
     render() {
         return (
             <View style = {styles.container}>
-            <Header 
+            <Header
             outerContainerStyles={{ backgroundColor: 'black', height: StatusBar.currentHeight - 5 }}
             />
-            <Header 
+            <Header
                 centerComponent={{ text: I18n.t('noti'), style: { color: '#fff', fontSize: 16, fontWeight: 'bold' } }}
                 outerContainerStyles={{ backgroundColor: '#5F5395', height: 50, marginTop: StatusBar.height }}
 

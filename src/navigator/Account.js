@@ -1,18 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, Alert } from 'react-native';
 import { List, ListItem, SearchBar, Header } from "react-native-elements";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { translate } from 'react-i18next';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 import axios from 'axios';
 
 export default class AdminAccount extends React.Component {
     static navigationOptions = {
         header: null
     }
-    
-        
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +22,7 @@ export default class AdminAccount extends React.Component {
         this.getUserProfile = this.getUserProfile.bind(this);
         this.onLogOut = this.onLogOut.bind(this);
 
-    }  
+    }
 
     componentDidMount(){
         this.getUserProfile();
@@ -51,12 +49,12 @@ export default class AdminAccount extends React.Component {
     render() {
 
         return (
-            
+
             <View style = {styles.container}>
-            <Header 
+            <Header
                 outerContainerStyles={{ backgroundColor: 'black', height: StatusBar.currentHeight - 5 }}
             />
-            <Header 
+            <Header
                 centerComponent={{ text: I18n.t('account'), style: { color: '#fff', fontSize: 16, fontWeight: 'bold' } }}
                 outerContainerStyles={{ backgroundColor: '#5F5395', height: 50 }}
                 innerContainerStyles={{ justifyContent: 'space-around' }}
@@ -67,7 +65,7 @@ export default class AdminAccount extends React.Component {
                 containerStyle={{ height: 50 }}
                 hideChevron
             /> */}
-            <ListItem 
+            <ListItem
                 title= {I18n.t('info')}
                 titleStyle = {styles.textStyle}
                 containerStyle={{ height: 50 }}

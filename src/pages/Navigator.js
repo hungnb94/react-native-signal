@@ -13,7 +13,7 @@ import UserNotification from '../navigator/UserNotification';
 import UserOldOrderStack from '../pages/UserOldOrderStack';
 import UserAccountStackNavigator from '../pages/UserAccountStackNavigator';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 export default class AdminNavigator extends React.Component {
 
@@ -28,7 +28,7 @@ export default class AdminNavigator extends React.Component {
         };
         this.onLogOut = this.onLogOut.bind(this);
         this._retrieveData2 = this._retrieveData2.bind(this);
-    }  
+    }
 
     componentWillMount(){
         this._retrieveData2();
@@ -115,20 +115,20 @@ const createNavigation = () => {
         }
     },  {
         tabBarOptions: {
-            
-              activeBackgroundColor :'#5F5395',          
+
+              activeBackgroundColor :'#5F5395',
               inactiveBackgroundColor :'black',
               activeTintColor: '#fff',
               showIcon: true,
-            
+
         },
         backgroundColor: '#4C9BCF',
         /* The header config from HomeScreen is now here */
       });
-    
+
 }
 
-    
+
 
   I18n.translations = {
     'en': {

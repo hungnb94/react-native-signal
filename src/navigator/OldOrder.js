@@ -4,7 +4,7 @@ import { List, ListItem, SearchBar, Header } from "react-native-elements";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PTRView from 'react-native-pull-to-refresh';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 import axios from 'axios';
 import {GetRequest} from '../helper/request_helper';
@@ -24,13 +24,13 @@ export default class AdminOldOrder extends React.Component {
 
         this._refresh = this._refresh.bind(this);
 
-    }  
+    }
 
     _refresh() {
         return new Promise((resolve) => {
             this.makeRemoteRequest();
             setTimeout(()=>{resolve()}, 1000)
-          
+
         });
     }
 
@@ -39,12 +39,12 @@ export default class AdminOldOrder extends React.Component {
     componentDidMount() {
         this.makeRemoteRequest();
     }
-    
+
 
     makeRemoteRequest = () => {
-        var dataDisplay = [];
+        let dataDisplay = [];
         this.setState({ loading: true });
-        axios.get(`https://tinhieu-backend.herokuapp.com/notification`, 
+        axios.get(`https://tinhieu-backend.herokuapp.com/notification`,
         {
             headers: {
                 "Authorization" : "Bearer " + this.state.access_token
@@ -63,7 +63,7 @@ export default class AdminOldOrder extends React.Component {
             console.log(error.response);
         })
     };
-    
+
 
     renderSeparator = () => {
         return (
@@ -76,14 +76,14 @@ export default class AdminOldOrder extends React.Component {
           />
         );
       };
-    
+
     render() {
         return (
             <View style = {styles.container} >
-            <Header 
+            <Header
                 outerContainerStyles={{ backgroundColor: 'black', height: StatusBar.currentHeight - 5 }}
             />
-            <Header 
+            <Header
                 centerComponent={{ text: I18n.t('oldSignal'), style: { color: '#fff', fontSize: 16, fontWeight: 'bold' } }}
                 outerContainerStyles={{ backgroundColor: '#5F5395', height: 50, marginTop: StatusBar.height }}
 
@@ -96,7 +96,7 @@ export default class AdminOldOrder extends React.Component {
                         ItemSeparatorComponent={this.renderSeparator}
                         inverted
                         renderItem={({ item }) => (
-                            <ListItem 
+                            <ListItem
                             title={`${item.currency_code}`}
                             titleStyle = {styles.textStyle}
                             subtitle={item.buy_or_sell == 0 ? "Buy - " + `${item.price}` : "Sell - " + `${item.price}`}
@@ -106,7 +106,7 @@ export default class AdminOldOrder extends React.Component {
                             containerStyle={{ borderBottomWidth: 0 }}
                             onPress={()=> this.props.navigation.navigate('OldOrderLook', { item: item, access_token : this.state.access_token })}
                             />
-                        
+
                         )}
                     />
             </PTRView>

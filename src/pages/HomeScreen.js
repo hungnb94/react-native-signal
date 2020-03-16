@@ -5,9 +5,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import { Ionicons } from 'react-native-vector-icons';
 
 import * as firebase from 'firebase';
-import { Permissions, Notifications } from 'expo';
+// import { Permissions, Notifications } from 'expo';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 import Navigator from '../pages/Navigator';
 
@@ -47,59 +47,59 @@ export default class HomeScreen extends React.Component {
             messagingSenderId: "449954797568"
           });
         }
-        
+
         this.onLogOut = this.onLogOut.bind(this);
         this._handleNotification = this._handleNotification.bind(this);
-        this.registerForPushNotificationsAsync = this.registerForPushNotificationsAsync.bind(this);
+        // this.registerForPushNotificationsAsync = this.registerForPushNotificationsAsync.bind(this);
 
-    }  
+    }
 
     _handleNotification = (notification) => {
         this.setState({notification: notification});
       };
 
     componentDidMount(){
-        this.registerForPushNotificationsAsync();
-        this._notificationSubscription = Notifications.addListener(this._handleNotification);
+        // this.registerForPushNotificationsAsync();
+        // this._notificationSubscription = Notifications.addListener(this._handleNotification);
     }
-    
-    registerForPushNotificationsAsync = async () => {
-        const { status: existingStatus } = await Permissions.getAsync(
-          Permissions.NOTIFICATIONS
-        );
-        let finalStatus = existingStatus;
-      
-        // only ask if permissions have not already been determined, because
-        // iOS won't necessarily prompt the user a second time.
-        if (existingStatus !== 'granted') {
-          // Android remote notification permissions are granted during the app
-          // install, so this will only ask on iOS
-          const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-          finalStatus = status;
-        }
-      
-        // Stop here if the user did not grant permissions
-        if (finalStatus !== 'granted') {
-          return;
-        }
-      
-        // Get the token that uniquely identifies this device
-        let token = await Notifications.getExpoPushTokenAsync();
-        
 
-        firebase.auth().signInAnonymously().catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(error);
-            // ...
-          });
-        let uid = this.state.user_id;
-        firebase.database().ref("users").child(uid).update({
-            expoPushToken : token
-        })
-      }
-    
+    // registerForPushNotificationsAsync = async () => {
+    //     const { status: existingStatus } = await Permissions.getAsync(
+    //       Permissions.NOTIFICATIONS
+    //     );
+    //     let finalStatus = existingStatus;
+    //
+    //     // only ask if permissions have not already been determined, because
+    //     // iOS won't necessarily prompt the user a second time.
+    //     if (existingStatus !== 'granted') {
+    //       // Android remote notification permissions are granted during the app
+    //       // install, so this will only ask on iOS
+    //       const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    //       finalStatus = status;
+    //     }
+    //
+    //     // Stop here if the user did not grant permissions
+    //     if (finalStatus !== 'granted') {
+    //       return;
+    //     }
+    //
+    //     // Get the token that uniquely identifies this device
+    //     let token = await Notifications.getExpoPushTokenAsync();
+    //
+    //
+    //     firebase.auth().signInAnonymously().catch(function(error) {
+    //         // Handle Errors here.
+    //         var errorCode = error.code;
+    //         var errorMessage = error.message;
+    //         console.log(error);
+    //         // ...
+    //       });
+    //     let uid = this.state.user_id;
+    //     firebase.database().ref("users").child(uid).update({
+    //         expoPushToken : token
+    //     })
+    //   }
+
     onLogOut(){
       AsyncStorage.multiRemove(['user_id', 'token', 'user_type']);
       this.setState({access_token : " ", user_id: null});
@@ -115,7 +115,7 @@ export default class HomeScreen extends React.Component {
           />
             <Navigator access_token = {this.state.access_token} onLogOut = {this.onLogOut} I18n = {this.state.I18n} />
         </View>
-            
+
         );
     }
 }
@@ -164,4 +164,3 @@ const styles = StyleSheet.create({
       backgroundColor: '#4C9BCF',
     },
   });
-  

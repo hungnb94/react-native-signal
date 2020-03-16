@@ -1,12 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, Picker, Alert } from 'react-native';
 import { List, ListItem, SearchBar, Header, FormValidationMessage, Button } from "react-native-elements";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
-import axios from 'axios';
-import {GetRequest} from '../helper/request_helper';
 
 
 export default class CurrentOrderLook extends React.Component {
@@ -27,7 +24,7 @@ export default class CurrentOrderLook extends React.Component {
             errorMessage : null,
             time_open : null
         };
-    }  
+    }
 
 
     render() {
@@ -38,7 +35,7 @@ export default class CurrentOrderLook extends React.Component {
         return (
             <View style = {styles.container}>
                 <ListItem hideChevron containerStyle={{ backgroundColor: 'black', height: 40 }}/>
-                <ListItem 
+                <ListItem
                     title={this.state.item.currency_code}
                     titleStyle = {styles.textStyle}
                     subtitle= {"" + date}
@@ -46,8 +43,8 @@ export default class CurrentOrderLook extends React.Component {
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
-                    title={this.state.item.buy_or_sell == 0 ? "BUY": "SELL"}
+                <ListItem
+                    title={this.state.item.buy_or_sell === 0 ? "BUY": "SELL"}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.item.price}
                     containerStyle={{ height: 50 }}
@@ -147,7 +144,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
         paddingVertical: 10,
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center' ,
         alignSelf: 'center'
     },

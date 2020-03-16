@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, StatusBar, FlatList, TextInput, Picker, Alert }
 import { List, ListItem, SearchBar, Header, FormValidationMessage, Button } from "react-native-elements";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 import axios from 'axios';
 import {GetRequest} from '../helper/request_helper';
@@ -26,67 +26,67 @@ export default class UserProfile extends React.Component {
             data: navigation.getParam('data', null),
             errorMessage : null
         };
-    }  
+    }
 
 
     render() {
         return (
             <View style = {styles.container}>
-                {/* <Header 
+                {/* <Header
                     centerComponent={{ text: 'Thông Tin Tài Khoản', style: { color: '#fff', fontSize: 16, fontWeight: 'bold' } }}
                     outerContainerStyles={{ backgroundColor: '#5F5395', height: 50 }}
                     innerContainerStyles={{ justifyContent: 'space-around' }}
                 /> */}
-                <ListItem 
+                <ListItem
                     title={I18n.t('first')}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.data.last_name}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={I18n.t('last')}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.data.first_name}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={I18n.t('username')}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.data.username}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={I18n.t('ID')}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.data.id}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={'Email'}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.data.email}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={I18n.t('phonenumber')}
                     titleStyle = {styles.textStyle}
                     rightTitle={"" + this.state.data.phone}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={I18n.t('dateactive')}
                     titleStyle = {styles.textStyle}
                     rightTitle={this.state.data.date_of_active == null ? I18n.t('inactive') : "" + this.state.data.date_of_active.split(' ')[0]}
                     containerStyle={{ height: 50 }}
                     hideChevron
                 />
-                <ListItem 
+                <ListItem
                     title={I18n.t('datedeact')}
                     titleStyle = {styles.textStyle}
                     rightTitle={this.state.data.date_of_deactive == null ? I18n.t('inactive') : "" + this.state.data.date_of_deactive.split(' ')[0]}
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
         paddingVertical: 10,
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center' ,
         alignSelf: 'center'
     },
